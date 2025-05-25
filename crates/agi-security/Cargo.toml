@@ -1,11 +1,11 @@
 [package]
-name = "rust_agi_os"
+name = "agi-security"
 version = "0.1.0"
 edition = "2021"
 authors = ["AGI OS Team"]
 description = "A strong artificial general intelligence operating system"
 license = "MIT"
-repository = "https://github.com/agi-os/rust-agi-os"
+repository = "https://github.com/Awakengine/rust-agi-os.git"
 
 [dependencies]
 tokio = { version = "1.45.0", features = ["full"] }

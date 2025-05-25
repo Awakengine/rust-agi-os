@@ -46,7 +46,7 @@ mod tests {
     #[test]
     fn test_repository() {
         let repository = env!("CARGO_PKG_REPOSITORY");
-        assert_eq!(repository, "https://github.com/agi-os/rust-agi-os");
+        assert_eq!(repository, "https://github.com/Awakengine/rust-agi-os.git");
     }
 }
 
