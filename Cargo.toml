@@ -19,15 +19,15 @@ log = "0.4.27"
 thiserror = "1.0.69"
 anyhow = "1.0.98"
 http = "0.2.12"
-openssl = "0.10.72"
+openssl = { version = "0.10.72", features = ["vendored"] }
 
 [workspace]
 members = [
-    "crates/agi-core",
-    "crates/agi-symbolic",
-    "crates/agi-neural",
-    "crates/agi-security",
-    "crates/agi-interaction"
+    "src/agi-core",
+    "src/agi-symbolic",
+    "src/agi-neural",
+    "src/agi-security",
+    "src/agi-interaction"
 ]
 
 [lib]

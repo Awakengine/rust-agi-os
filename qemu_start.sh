@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # QEMU启动脚本 - 用于启动AGI操作系统虚拟机
-# 配置为用户指定的高性能硬件：14核20线程CPU、35GB内存、2TB固态硬盘
+# 配置为用户指定的高性能硬件：4核8线程CPU、3GB内存、2TB固态硬盘
 
 # 设置虚拟机参数
 VM_NAME="AGI_OS"
 DISK_IMAGE="/home/ubuntu/agi_vm/agi_os.qcow2"
-MEMORY="35G"
-CPU_CORES=14
-CPU_THREADS=20
+MEMORY="3G"
+CPU_CORES=4
+CPU_THREADS=8
 CPU_SOCKETS=1
 
 # 网络配置

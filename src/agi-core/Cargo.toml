@@ -1,0 +1,31 @@
+[package]
+name = "agi-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["AGI OS Team"]
+description = "A strong artificial general intelligence operating system"
+license = "MIT"
+repository = "https://github.com/Awakengine/rust-agi-os.git"
+
+[dependencies]
+tokio = { version = "1.45.0", features = ["full"] }
+futures = "0.3.31"
+crossbeam = "0.8.4"
+rayon = "1.10.0"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+rand = "0.8.5"
+log = "0.4.27"
+thiserror = "1.0.69"
+anyhow = "1.0.98"
+http = "0.2.12"
+openssl = "0.10.72"
+
+
+[lib]
+name = "agi_core"
+path = "src/lib.rs"
+
+[[bin]]
+name = "agi_core"
+path = "src/main.rs"
