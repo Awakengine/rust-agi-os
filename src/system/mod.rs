@@ -1,26 +1,33 @@
-// 系统管理模块 - 资源管理
-pub mod resource;
+mod config;
+mod resource;
+mod lifecycle;
+mod monitoring;
+mod integration;
 
-// 系统管理模块 - 配置管理
-pub mod configuration;
+// 使用具体的模块导出，避免glob导出冲突
+pub use config::{SystemConfig, SystemConfigManager, ConfigError};
+pub use resource::{Resource, ResourceManager, ResourceError};
+pub use lifecycle::{SystemLifecycle, SystemLifecycleManager, LifecycleError};
+pub use monitoring::{Monitoring, MonitoringManager, MonitoringError, MetricType};
+pub use integration::{SystemIntegration, SystemIntegrationManager, IntegrationError};
 
-// 系统管理模块 - 生命周期管理
-pub mod lifecycle;
+// 导出特定函数，避免冲突
+pub use config::init as config_init;
+pub use config::start as config_start;
+pub use config::stop as config_stop;
 
-// 系统管理模块 - 监控系统
-pub mod monitoring;
+pub use resource::init as resource_init;
+pub use resource::start as resource_start;
+pub use resource::stop as resource_stop;
 
-// 系统管理模块 - 集成接口
-pub mod integration;
+pub use lifecycle::init as lifecycle_init;
+pub use lifecycle::start as lifecycle_start;
+pub use lifecycle::stop as lifecycle_stop;
 
-// 系统管理模块 - 核心功能
-pub mod core;
+pub use monitoring::init as monitoring_init;
+pub use monitoring::start as monitoring_start;
+pub use monitoring::stop as monitoring_stop;
 
-// 导出系统核心初始化函数
-pub use core::initialize;
-
-// 导出系统启动函数
-pub use lifecycle::start;
-
-// 导出系统停止函数
-pub use lifecycle::stop;
+pub use integration::init as integration_init;
+pub use integration::start as integration_start;
+pub use integration::stop as integration_stop;

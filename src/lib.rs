@@ -1,134 +1,78 @@
-// AGI操作系统 - 主库文件
-// 此文件导出所有公共模块和接口
-
-// 导出核心模块
-pub mod kernel;
-pub mod neuro_symbolic;
-pub mod meta_reasoning;
+pub mod core;
+pub mod gui;
 pub mod interaction;
+pub mod kernel;
+pub mod meta_reasoning;
+pub mod neuro_symbolic;
+pub mod reflection;
 pub mod security;
 pub mod system;
-pub mod reflection;
 
-// 导出测试模块
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test_name() {
-        let name = env!("CARGO_PKG_NAME");
-        assert_eq!(name, "rust_agi_os");
-    }
+// 使用具体的模块导出，避免glob导出冲突
+// Core模块导出
+pub use crate::core::config::{Config, ConfigManager, ConfigError};
+pub use crate::core::context::{Context, ContextManager, ContextError};
+pub use crate::core::integration::{Integration as CoreIntegration, IntegrationManager as CoreIntegrationManager, IntegrationError as CoreIntegrationError};
+pub use crate::core::lifecycle::{Lifecycle as CoreLifecycle, LifecycleManager as CoreLifecycleManager, LifecycleError as CoreLifecycleError};
 
-    #[test]
-    fn test_version() {
-        let version = env!("CARGO_PKG_VERSION");
-        assert_eq!(version, "0.1.0");
-    }
+// GUI模块导出
+pub use crate::gui::window::{Window, WindowError};
+pub use crate::gui::render::{Renderer, Color, RenderError};
+pub use crate::gui::window_system::{WindowSystem, WindowSystemError};
+pub use crate::gui::theme::{Theme, ThemeManager, ThemeError};
+pub use crate::gui::desktop::{Desktop, DesktopManager, DesktopError, MacMenuBar};
+pub use crate::gui::window_manager::{WindowManager, WindowManagerError};
 
-    #[test]
-    fn test_authors() {
-        let authors = env!("CARGO_PKG_AUTHORS");
-        assert_eq!(authors, "AGI OS Team");
-    }
+// Interaction模块导出
+pub use crate::interaction::vision::{VisionSystem, Image, Object, VisionError};
+pub use crate::interaction::speech::{SpeechSystem, Audio, Recording, SpeechError};
+pub use crate::interaction::natural_language::{NaturalLanguageSystem, Language, Sentiment, Entity, Intent, NaturalLanguageError};
 
-    #[test]
-    fn test_description() {
-        let description = env!("CARGO_PKG_DESCRIPTION");
-        assert_eq!(description, "A strong artificial general intelligence operating system");
-    }
+// Kernel模块导出
+pub use crate::kernel::memory::{Memory, MemoryManager, MemoryError};
+pub use crate::kernel::process::{Process, ProcessManager, ProcessError};
 
-    #[test]
-    fn test_license() {
-        let license = env!("CARGO_PKG_LICENSE");
-        assert_eq!(license, "MIT");
-    }
+// Meta-reasoning模块导出
+pub use crate::meta_reasoning::planning::{Planning, PlanningSystem, PlanningError};
+pub use crate::meta_reasoning::reasoning::{Reasoning, ReasoningSystem, ReasoningError};
 
-    #[test]
-    fn test_repository() {
-        let repository = env!("CARGO_PKG_REPOSITORY");
-        assert_eq!(repository, "https://github.com/Awakengine/rust-agi-os.git");
-    }
-}
+// Neuro-symbolic模块导出
+pub use crate::neuro_symbolic::neural::{NeuralNetwork, NeuralNetworkManager, NeuralError};
+pub use crate::neuro_symbolic::symbolic::{Symbol, SymbolicSystem, SymbolicError};
+pub use crate::neuro_symbolic::knowledge::{Knowledge, KnowledgeBase, KnowledgeError};
+pub use crate::neuro_symbolic::learning::{Learning, LearningSystem, LearningError};
+pub use crate::neuro_symbolic::integration::{Integration as NeuroSymbolicIntegration, IntegrationSystem, IntegrationError as NeuroSymbolicIntegrationError};
 
-// 系统版本信息
-pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-pub const NAME: &str = env!("CARGO_PKG_NAME");
+// Reflection模块导出
+pub use crate::reflection::performance::{Performance, PerformanceMetric, PerformanceError, MetricType as ReflectionMetricType};
+pub use crate::reflection::reflection::{Reflection, ReflectionManager, ReflectionError};
 
-// 系统状态枚举
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum SystemStatus {
-    Initializing,
-    Running,
-    Paused,
-    Terminating,
-    Terminated,
-    Error,
-}
+// Security模块导出
+pub use crate::security::sandbox::{Sandbox, SandboxManager, SandboxError};
+pub use crate::security::verification::{Verification, VerificationManager, VerificationError};
+pub use crate::security::threat_detection::{ThreatDetection, ThreatDetectionManager, ThreatDetectionError};
+pub use crate::security::access_control::{AccessControl, AccessControlManager, AccessControlError};
 
-// 系统配置接口
-pub trait ConfigurableSystem {
-    fn get_status(&self) -> SystemStatus;
-    fn set_config(&mut self, config: &str) -> Result<(), Box<dyn std::error::Error>>;
-}
+// System模块导出
+pub use crate::system::config::{SystemConfig, SystemConfigManager, ConfigError as SystemConfigError};
+pub use crate::system::resource::{Resource, ResourceManager, ResourceError};
+pub use crate::system::lifecycle::{SystemLifecycle, SystemLifecycleManager, LifecycleError as SystemLifecycleError};
+pub use crate::system::monitoring::{Monitoring, MonitoringManager, MonitoringError, MetricType as SystemMetricType};
+pub use crate::system::integration::{SystemIntegration, SystemIntegrationManager, IntegrationError as SystemIntegrationError};
 
-// 系统组件接口
-pub trait SystemComponent: ConfigurableSystem {
-    fn name(&self) -> &str;
-    fn version(&self) -> &str;
-    fn initialize(&mut self) -> Result<(), Box<dyn std::error::Error>>;
-    fn start(&mut self) -> Result<(), Box<dyn std::error::Error>>;
-    fn stop(&mut self) -> Result<(), Box<dyn std::error::Error>>;
-    fn pause(&mut self) -> Result<(), Box<dyn std::error::Error>>;
-    fn resume(&mut self) -> Result<(), Box<dyn std::error::Error>>;
-}
+// 导出特定函数，避免冲突
+pub use crate::core::config_init;
+pub use crate::core::config_start;
+pub use crate::core::config_stop;
 
-// 系统初始化函数
-pub fn initialize_system() -> Result<(), Box<dyn std::error::Error>> {
-    println!("初始化 AGI 操作系统 v{}", VERSION);
-    
-    // 初始化各个核心模块
-    kernel::initialize()?;
-    neuro_symbolic::initialize()?;
-    meta_reasoning::initialize()?;
-    interaction::initialize()?;
-    security::initialize()?;
-    system::initialize()?;
-    reflection::initialize()?;
-    
-    println!("AGI 操作系统初始化完成");
-    Ok(())
-}
+pub use crate::gui::window_init;
+pub use crate::gui::window_start;
+pub use crate::gui::window_stop;
 
-// 系统启动函数
-pub fn start_system() -> Result<(), Box<dyn std::error::Error>> {
-    println!("启动 AGI 操作系统 v{}", VERSION);
-    
-    // 启动各个核心模块
-    kernel::start()?;
-    neuro_symbolic::start()?;
-    meta_reasoning::start()?;
-    interaction::start()?;
-    security::start()?;
-    system::start()?;
-    reflection::start()?;
-    
-    println!("AGI 操作系统启动完成");
-    Ok(())
-}
+pub use crate::security::sandbox_init;
+pub use crate::security::sandbox_start;
+pub use crate::security::sandbox_stop;
 
-// 系统停止函数
-pub fn stop_system() -> Result<(), Box<dyn std::error::Error>> {
-    println!("停止 AGI 操作系统");
-    
-    // 按照相反的顺序停止各个模块
-    reflection::stop()?;
-    system::stop()?;
-    security::stop()?;
-    interaction::stop()?;
-    meta_reasoning::stop()?;
-    neuro_symbolic::stop()?;
-    kernel::stop()?;
-    
-    println!("AGI 操作系统已停止");
-    Ok(())
-}
+pub use crate::system::lifecycle_init;
+pub use crate::system::lifecycle_start;
+pub use crate::system::lifecycle_stop;

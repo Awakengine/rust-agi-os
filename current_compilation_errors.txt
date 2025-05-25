@@ -1,0 +1,1101 @@
+   Compiling rust_agi_os v0.1.0 (/home/ubuntu/rust-agi-os)
+warning: unused import: `HashSet`
+ --> src/meta_reasoning/reasoning.rs:1:33
+  |
+1 | use std::collections::{HashMap, HashSet};
+  |                                 ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rust_agi_os` (lib) generated 1 warning (run `cargo fix --lib -p rust_agi_os` to apply 1 suggestion)
+error[E0252]: the name `process` is defined multiple times
+  --> src/main.rs:14:5
+   |
+4  | use rust_agi_os::kernel::{memory, process};
+   |                                   ------- previous import of the module `process` here
+...
+14 | use std::process;
+   |     ^^^^^^^^^^^^ `process` reimported here
+   |
+   = note: `process` must be defined only once in the type namespace of this module
+help: you can use `as` to change the binding name of the import
+   |
+14 | use std::process as other_process;
+   |                  ++++++++++++++++
+
+error[E0432]: unresolved imports `rust_agi_os::interaction::context`, `rust_agi_os::interaction::interface`
+ --> src/main.rs:7:54
+  |
+7 | use rust_agi_os::interaction::{multimodal, language, context, interface};
+  |                                                      ^^^^^^^  ^^^^^^^^^ no `interface` in `interaction`
+  |                                                      |
+  |                                                      no `context` in `interaction`
+  |
+  = help: consider importing one of these modules instead:
+          rust_agi_os::core::context
+          uuid::timestamp::context
+
+error[E0433]: failed to resolve: could not find `MemoryManager` in `memory`
+  --> src/main.rs:31:40
+   |
+31 |     let memory_manager = match memory::MemoryManager::new(system_config.get_memory_config()) {
+   |                                        ^^^^^^^^^^^^^ could not find `MemoryManager` in `memory`
+
+error[E0433]: failed to resolve: could not find `ProcessManager` in `process`
+  --> src/main.rs:42:42
+   |
+42 |     let process_manager = match process::ProcessManager::new(system_config.get_process_config(), memory_manager.clone()) {
+   |                                          ^^^^^^^^^^^^^^ could not find `ProcessManager` in `process`
+
+error[E0433]: failed to resolve: could not find `SandboxManager` in `sandbox`
+  --> src/main.rs:53:42
+   |
+53 |     let sandbox_manager = match sandbox::SandboxManager::new(system_config.get_security_config()) {
+   |                                          ^^^^^^^^^^^^^^ could not find `SandboxManager` in `sandbox`
+
+error[E0433]: failed to resolve: could not find `NeuralEngine` in `neural`
+  --> src/main.rs:64:39
+   |
+64 |     let neural_engine = match neural::NeuralEngine::new(system_config.get_neural_config()) {
+   |                                       ^^^^^^^^^^^^ could not find `NeuralEngine` in `neural`
+
+error[E0433]: failed to resolve: could not find `SymbolicSystem` in `symbolic`
+  --> src/main.rs:75:43
+   |
+75 |     let symbolic_system = match symbolic::SymbolicSystem::new(system_config.get_symbolic_config()) {
+   |                                           ^^^^^^^^^^^^^^ could not find `SymbolicSystem` in `symbolic`
+
+error[E0433]: failed to resolve: could not find `LearningSystem` in `learning`
+  --> src/main.rs:86:43
+   |
+86 |     let learning_system = match learning::LearningSystem::new(
+   |                                           ^^^^^^^^^^^^^^ could not find `LearningSystem` in `learning`
+
+error[E0433]: failed to resolve: could not find `ReasoningEngine` in `reasoning`
+   --> src/main.rs:101:45
+    |
+101 |     let reasoning_engine = match reasoning::ReasoningEngine::new(
+    |                                             ^^^^^^^^^^^^^^^
+    |                                             |
+    |                                             could not find `ReasoningEngine` in `reasoning`
+    |                                             help: a struct with a similar name exists: `ReasoningConfig`
+
+error[E0433]: failed to resolve: could not find `PlanningSystem` in `planning`
+   --> src/main.rs:116:43
+    |
+116 |     let planning_system = match planning::PlanningSystem::new(
+    |                                           ^^^^^^^^^^^^^^
+    |                                           |
+    |                                           could not find `PlanningSystem` in `planning`
+    |                                           help: a struct with a similar name exists: `PlanningStatus`
+
+error[E0433]: failed to resolve: could not find `MultimodalEngine` in `multimodal`
+   --> src/main.rs:130:47
+    |
+130 |     let multimodal_engine = match multimodal::MultimodalEngine::new(system_config.get_multimodal_config()) {
+    |                                               ^^^^^^^^^^^^^^^^
+    |                                               |
+    |                                               could not find `MultimodalEngine` in `multimodal`
+    |                                               help: an enum with a similar name exists: `MultimodalError`
+
+error[E0433]: failed to resolve: could not find `LanguageProcessor` in `language`
+   --> src/main.rs:141:46
+    |
+141 |     let language_processor = match language::LanguageProcessor::new(system_config.get_language_config()) {
+    |                                              ^^^^^^^^^^^^^^^^^ could not find `LanguageProcessor` in `language`
+
+error[E0433]: failed to resolve: could not find `VerificationEngine` in `verification`
+   --> src/main.rs:174:51
+    |
+174 |     let verification_engine = match verification::VerificationEngine::new(
+    |                                                   ^^^^^^^^^^^^^^^^^^
+    |                                                   |
+    |                                                   could not find `VerificationEngine` in `verification`
+    |                                                   help: an enum with a similar name exists: `VerificationError`
+
+error[E0433]: failed to resolve: could not find `ThreatDetector` in `threat_detection`
+   --> src/main.rs:188:51
+    |
+188 |     let threat_detector = match threat_detection::ThreatDetector::new(system_config.get_threat_config()) {
+    |                                                   ^^^^^^^^^^^^^^ could not find `ThreatDetector` in `threat_detection`
+
+error[E0433]: failed to resolve: could not find `IntegrationInterface` in `integration`
+   --> src/main.rs:228:52
+    |
+228 |     let integration_interface = match integration::IntegrationInterface::new(
+    |                                                    ^^^^^^^^^^^^^^^^^^^^ could not find `IntegrationInterface` in `integration`
+
+error[E0425]: cannot find function `exit` in module `process`
+  --> src/main.rs:24:22
+   |
+24 |             process::exit(1);
+   |                      ^^^^ not found in `process`
+   |
+help: consider importing this function
+   |
+4  + use std::process::exit;
+   |
+help: if you import `exit`, refer to it directly
+   |
+24 -             process::exit(1);
+24 +             exit(1);
+   |
+
+error[E0425]: cannot find function `exit` in module `process`
+  --> src/main.rs:35:22
+   |
+35 |             process::exit(1);
+   |                      ^^^^ not found in `process`
+   |
+help: consider importing this function
+   |
+4  + use std::process::exit;
+   |
+help: if you import `exit`, refer to it directly
+   |
+35 -             process::exit(1);
+35 +             exit(1);
+   |
+
+error[E0425]: cannot find function `exit` in module `process`
+  --> src/main.rs:46:22
+   |
+46 |             process::exit(1);
+   |                      ^^^^ not found in `process`
+   |
+help: consider importing this function
+   |
+4  + use std::process::exit;
+   |
+help: if you import `exit`, refer to it directly
+   |
+46 -             process::exit(1);
+46 +             exit(1);
+   |
+
+error[E0425]: cannot find function `exit` in module `process`
+  --> src/main.rs:57:22
+   |
+57 |             process::exit(1);
+   |                      ^^^^ not found in `process`
+   |
+help: consider importing this function
+   |
+4  + use std::process::exit;
+   |
+help: if you import `exit`, refer to it directly
+   |
+57 -             process::exit(1);
+57 +             exit(1);
+   |
+
+error[E0425]: cannot find function `exit` in module `process`
+  --> src/main.rs:68:22
+   |
+68 |             process::exit(1);
+   |                      ^^^^ not found in `process`
+   |
+help: consider importing this function
+   |
+4  + use std::process::exit;
+   |
+help: if you import `exit`, refer to it directly
+   |
+68 -             process::exit(1);
+68 +             exit(1);
+   |
+
+error[E0425]: cannot find function `exit` in module `process`
+  --> src/main.rs:79:22
+   |
+79 |             process::exit(1);
+   |                      ^^^^ not found in `process`
+   |
+help: consider importing this function
+   |
+4  + use std::process::exit;
+   |
+help: if you import `exit`, refer to it directly
+   |
+79 -             process::exit(1);
+79 +             exit(1);
+   |
+
+error[E0425]: cannot find function `exit` in module `process`
+  --> src/main.rs:94:22
+   |
+94 |             process::exit(1);
+   |                      ^^^^ not found in `process`
+   |
+help: consider importing this function
+   |
+4  + use std::process::exit;
+   |
+help: if you import `exit`, refer to it directly
+   |
+94 -             process::exit(1);
+94 +             exit(1);
+   |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:109:22
+    |
+109 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+109 -             process::exit(1);
+109 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:123:22
+    |
+123 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+123 -             process::exit(1);
+123 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:134:22
+    |
+134 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+134 -             process::exit(1);
+134 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:145:22
+    |
+145 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+145 -             process::exit(1);
+145 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:156:22
+    |
+156 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+156 -             process::exit(1);
+156 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:167:22
+    |
+167 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+167 -             process::exit(1);
+167 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:181:22
+    |
+181 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+181 -             process::exit(1);
+181 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:192:22
+    |
+192 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+192 -             process::exit(1);
+192 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:207:22
+    |
+207 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+207 -             process::exit(1);
+207 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:221:22
+    |
+221 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+221 -             process::exit(1);
+221 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:235:22
+    |
+235 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+235 -             process::exit(1);
+235 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:249:22
+    |
+249 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+249 -             process::exit(1);
+249 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:264:22
+    |
+264 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+264 -             process::exit(1);
+264 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:284:22
+    |
+284 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+284 -             process::exit(1);
+284 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:295:22
+    |
+295 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+295 -             process::exit(1);
+295 +             exit(1);
+    |
+
+error[E0425]: cannot find function `exit` in module `process`
+   --> src/main.rs:304:22
+    |
+304 |             process::exit(1);
+    |                      ^^^^ not found in `process`
+    |
+help: consider importing this function
+    |
+4   + use std::process::exit;
+    |
+help: if you import `exit`, refer to it directly
+    |
+304 -             process::exit(1);
+304 +             exit(1);
+    |
+
+warning: unused import: `std::process`
+  --> src/main.rs:14:5
+   |
+14 | use std::process;
+   |     ^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+error[E0308]: `match` arms have incompatible types
+  --> src/main.rs:24:13
+   |
+20 |       let system_config = match config::SystemConfig::load_from_file("config/system.json") {
+   |  _________________________-
+21 | |         Ok(cfg) => cfg,
+   | |                    --- this is found to be of type `SystemConfig`
+22 | |         Err(e) => {
+23 | |             eprintln!("无法加载系统配置: {}", e);
+24 | |             process::exit(1);
+   | |             ^^^^^^^^^^^^^^^^^ expected `SystemConfig`, found `()`
+25 | |         }
+26 | |     };
+   | |_____- `match` arms have incompatible types
+
+error[E0308]: `match` arms have incompatible types
+  --> src/main.rs:35:13
+   |
+31 |       let memory_manager = match memory::MemoryManager::new(system_config.get_memory_config()) {
+   |  __________________________-
+32 | |         Ok(mm) => Arc::new(Mutex::new(mm)),
+   | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+33 | |         Err(e) => {
+34 | |             eprintln!("内存管理初始化失败: {}", e);
+35 | |             process::exit(1);
+   | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+36 | |         }
+37 | |     };
+   | |_____- `match` arms have incompatible types
+   |
+   = note: expected struct `Arc<Mutex<_>>`
+           found unit type `()`
+help: consider returning the local binding `e`
+   |
+35 ~             process::exit(1);
+36 +             e
+   |
+
+error[E0308]: `match` arms have incompatible types
+  --> src/main.rs:46:13
+   |
+42 |       let process_manager = match process::ProcessManager::new(system_config.get_process_config(), memory_manager.clone()) {
+   |  ___________________________-
+43 | |         Ok(pm) => Arc::new(Mutex::new(pm)),
+   | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+44 | |         Err(e) => {
+45 | |             eprintln!("进程管理初始化失败: {}", e);
+46 | |             process::exit(1);
+   | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+47 | |         }
+48 | |     };
+   | |_____- `match` arms have incompatible types
+   |
+   = note: expected struct `Arc<Mutex<_>>`
+           found unit type `()`
+help: consider returning the local binding `e`
+   |
+46 ~             process::exit(1);
+47 +             e
+   |
+
+error[E0308]: `match` arms have incompatible types
+  --> src/main.rs:57:13
+   |
+53 |       let sandbox_manager = match sandbox::SandboxManager::new(system_config.get_security_config()) {
+   |  ___________________________-
+54 | |         Ok(sm) => Arc::new(Mutex::new(sm)),
+   | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+55 | |         Err(e) => {
+56 | |             eprintln!("安全沙箱初始化失败: {}", e);
+57 | |             process::exit(1);
+   | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+58 | |         }
+59 | |     };
+   | |_____- `match` arms have incompatible types
+   |
+   = note: expected struct `Arc<Mutex<_>>`
+           found unit type `()`
+help: consider returning the local binding `e`
+   |
+57 ~             process::exit(1);
+58 +             e
+   |
+
+error[E0308]: `match` arms have incompatible types
+  --> src/main.rs:68:13
+   |
+64 |       let neural_engine = match neural::NeuralEngine::new(system_config.get_neural_config()) {
+   |  _________________________-
+65 | |         Ok(ne) => Arc::new(Mutex::new(ne)),
+   | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+66 | |         Err(e) => {
+67 | |             eprintln!("神经网络引擎初始化失败: {}", e);
+68 | |             process::exit(1);
+   | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+69 | |         }
+70 | |     };
+   | |_____- `match` arms have incompatible types
+   |
+   = note: expected struct `Arc<Mutex<_>>`
+           found unit type `()`
+help: consider returning the local binding `e`
+   |
+68 ~             process::exit(1);
+69 +             e
+   |
+
+error[E0308]: `match` arms have incompatible types
+  --> src/main.rs:79:13
+   |
+75 |       let symbolic_system = match symbolic::SymbolicSystem::new(system_config.get_symbolic_config()) {
+   |  ___________________________-
+76 | |         Ok(ss) => Arc::new(Mutex::new(ss)),
+   | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+77 | |         Err(e) => {
+78 | |             eprintln!("符号系统初始化失败: {}", e);
+79 | |             process::exit(1);
+   | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+80 | |         }
+81 | |     };
+   | |_____- `match` arms have incompatible types
+   |
+   = note: expected struct `Arc<Mutex<_>>`
+           found unit type `()`
+help: consider returning the local binding `e`
+   |
+79 ~             process::exit(1);
+80 +             e
+   |
+
+error[E0308]: `match` arms have incompatible types
+  --> src/main.rs:94:13
+   |
+86 |       let learning_system = match learning::LearningSystem::new(
+   |  ___________________________-
+87 | |         system_config.get_learning_config(),
+88 | |         neural_engine.clone(),
+89 | |         symbolic_system.clone()
+90 | |     ) {
+91 | |         Ok(ls) => Arc::new(Mutex::new(ls)),
+   | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+...  |
+94 | |             process::exit(1);
+   | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+95 | |         }
+96 | |     };
+   | |_____- `match` arms have incompatible types
+   |
+   = note: expected struct `Arc<Mutex<_>>`
+           found unit type `()`
+help: consider returning the local binding `e`
+   |
+94 ~             process::exit(1);
+95 +             e
+   |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:109:13
+    |
+101 |       let reasoning_engine = match reasoning::ReasoningEngine::new(
+    |  ____________________________-
+102 | |         system_config.get_reasoning_config(),
+103 | |         symbolic_system.clone(),
+104 | |         learning_system.clone()
+105 | |     ) {
+106 | |         Ok(re) => Arc::new(Mutex::new(re)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+...   |
+109 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+110 | |         }
+111 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+109 ~             process::exit(1);
+110 +             e
+    |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:123:13
+    |
+116 |       let planning_system = match planning::PlanningSystem::new(
+    |  ___________________________-
+117 | |         system_config.get_planning_config(),
+118 | |         reasoning_engine.clone()
+119 | |     ) {
+120 | |         Ok(ps) => Arc::new(Mutex::new(ps)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+...   |
+123 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+124 | |         }
+125 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+123 ~             process::exit(1);
+124 +             e
+    |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:134:13
+    |
+130 |       let multimodal_engine = match multimodal::MultimodalEngine::new(system_config.get_multimodal_config()) {
+    |  _____________________________-
+131 | |         Ok(me) => Arc::new(Mutex::new(me)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+132 | |         Err(e) => {
+133 | |             eprintln!("多模态交互引擎初始化失败: {}", e);
+134 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+135 | |         }
+136 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+134 ~             process::exit(1);
+135 +             e
+    |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:145:13
+    |
+141 |       let language_processor = match language::LanguageProcessor::new(system_config.get_language_config()) {
+    |  ______________________________-
+142 | |         Ok(lp) => Arc::new(Mutex::new(lp)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+143 | |         Err(e) => {
+144 | |             eprintln!("语言处理器初始化失败: {}", e);
+145 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+146 | |         }
+147 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+145 ~             process::exit(1);
+146 +             e
+    |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:156:13
+    |
+152 |       let context_manager = match context::ContextManager::new(system_config.get_context_config()) {
+    |  ___________________________-
+153 | |         Ok(cm) => Arc::new(Mutex::new(cm)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+154 | |         Err(e) => {
+155 | |             eprintln!("上下文管理器初始化失败: {}", e);
+156 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+157 | |         }
+158 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+156 ~             process::exit(1);
+157 +             e
+    |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:167:13
+    |
+163 |       let interface_manager = match interface::InterfaceManager::new(system_config.get_interface_config()) {
+    |  _____________________________-
+164 | |         Ok(im) => Arc::new(Mutex::new(im)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+165 | |         Err(e) => {
+166 | |             eprintln!("接口管理器初始化失败: {}", e);
+167 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+168 | |         }
+169 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+167 ~             process::exit(1);
+168 +             e
+    |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:181:13
+    |
+174 |       let verification_engine = match verification::VerificationEngine::new(
+    |  _______________________________-
+175 | |         system_config.get_verification_config(),
+176 | |         reasoning_engine.clone()
+177 | |     ) {
+178 | |         Ok(ve) => Arc::new(Mutex::new(ve)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+...   |
+181 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+182 | |         }
+183 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+181 ~             process::exit(1);
+182 +             e
+    |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:192:13
+    |
+188 |       let threat_detector = match threat_detection::ThreatDetector::new(system_config.get_threat_config()) {
+    |  ___________________________-
+189 | |         Ok(td) => Arc::new(Mutex::new(td)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+190 | |         Err(e) => {
+191 | |             eprintln!("威胁检测系统初始化失败: {}", e);
+192 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+193 | |         }
+194 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+192 ~             process::exit(1);
+193 +             e
+    |
+
+error[E0061]: this function takes 0 arguments but 3 arguments were supplied
+   --> src/main.rs:199:34
+    |
+199 |     let resource_manager = match resource::ResourceManager::new(
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+200 |         system_config.get_resource_config(),
+    |         ----------------------------------- unexpected argument #1
+201 |         memory_manager.clone(),
+    |         ---------------------- unexpected argument #2
+202 |         process_manager.clone()
+    |         ----------------------- unexpected argument #3
+    |
+note: associated function defined here
+   --> /home/ubuntu/rust-agi-os/src/system/resource.rs:88:12
+    |
+88  |     pub fn new() -> Self {
+    |            ^^^
+help: remove the extra arguments
+    |
+200 -         system_config.get_resource_config(),
+200 +         ) {
+    |
+
+error[E0308]: mismatched types
+   --> src/main.rs:204:9
+    |
+199 |       let resource_manager = match resource::ResourceManager::new(
+    |  __________________________________-
+200 | |         system_config.get_resource_config(),
+201 | |         memory_manager.clone(),
+202 | |         process_manager.clone()
+203 | |     ) {
+    | |_____- this expression has type `ResourceManager`
+204 |           Ok(rm) => Arc::new(Mutex::new(rm)),
+    |           ^^^^^^ expected `ResourceManager`, found `Result<_, _>`
+    |
+    = note: expected struct `ResourceManager`
+                 found enum `Result<_, _>`
+
+error[E0308]: mismatched types
+   --> src/main.rs:205:9
+    |
+199 |       let resource_manager = match resource::ResourceManager::new(
+    |  __________________________________-
+200 | |         system_config.get_resource_config(),
+201 | |         memory_manager.clone(),
+202 | |         process_manager.clone()
+203 | |     ) {
+    | |_____- this expression has type `ResourceManager`
+204 |           Ok(rm) => Arc::new(Mutex::new(rm)),
+205 |           Err(e) => {
+    |           ^^^^^^ expected `ResourceManager`, found `Result<_, _>`
+    |
+    = note: expected struct `ResourceManager`
+                 found enum `Result<_, _>`
+
+error[E0308]: mismatched types
+   --> src/main.rs:218:9
+    |
+214 |       let monitoring_system = match monitoring::MonitoringSystem::new(
+    |  ___________________________________-
+215 | |         system_config.get_monitoring_config(),
+216 | |         resource_manager.clone()
+217 | |     ) {
+    | |_____- this expression has type `MonitoringSystem`
+218 |           Ok(ms) => Arc::new(Mutex::new(ms)),
+    |           ^^^^^^ expected `MonitoringSystem`, found `Result<_, _>`
+    |
+    = note: expected struct `MonitoringSystem`
+                 found enum `Result<_, _>`
+
+error[E0308]: mismatched types
+   --> src/main.rs:219:9
+    |
+214 |       let monitoring_system = match monitoring::MonitoringSystem::new(
+    |  ___________________________________-
+215 | |         system_config.get_monitoring_config(),
+216 | |         resource_manager.clone()
+217 | |     ) {
+    | |_____- this expression has type `MonitoringSystem`
+218 |           Ok(ms) => Arc::new(Mutex::new(ms)),
+219 |           Err(e) => {
+    |           ^^^^^^ expected `MonitoringSystem`, found `Result<_, _>`
+    |
+    = note: expected struct `MonitoringSystem`
+                 found enum `Result<_, _>`
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:235:13
+    |
+228 |       let integration_interface = match integration::IntegrationInterface::new(
+    |  _________________________________-
+229 | |         system_config.get_integration_config(),
+230 | |         interface_manager.clone()
+231 | |     ) {
+232 | |         Ok(ii) => Arc::new(Mutex::new(ii)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<_>>`
+...   |
+235 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<_>>`, found `()`
+236 | |         }
+237 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<_>>`
+            found unit type `()`
+help: consider returning the local binding `e`
+    |
+235 ~             process::exit(1);
+236 +             e
+    |
+
+error[E0308]: mismatched types
+   --> src/main.rs:246:9
+    |
+242 |       let performance_monitor = match performance::PerformanceMonitor::new(
+    |  _____________________________________-
+243 | |         system_config.get_performance_config(),
+244 | |         monitoring_system.clone()
+245 | |     ) {
+    | |_____- this expression has type `PerformanceMonitor`
+246 |           Ok(pm) => Arc::new(Mutex::new(pm)),
+    |           ^^^^^^ expected `PerformanceMonitor`, found `Result<_, _>`
+    |
+    = note: expected struct `PerformanceMonitor`
+                 found enum `Result<_, _>`
+
+error[E0308]: mismatched types
+   --> src/main.rs:247:9
+    |
+242 |       let performance_monitor = match performance::PerformanceMonitor::new(
+    |  _____________________________________-
+243 | |         system_config.get_performance_config(),
+244 | |         monitoring_system.clone()
+245 | |     ) {
+    | |_____- this expression has type `PerformanceMonitor`
+246 |           Ok(pm) => Arc::new(Mutex::new(pm)),
+247 |           Err(e) => {
+    |           ^^^^^^ expected `PerformanceMonitor`, found `Result<_, _>`
+    |
+    = note: expected struct `PerformanceMonitor`
+                 found enum `Result<_, _>`
+
+error[E0061]: this function takes 2 arguments but 3 arguments were supplied
+   --> src/main.rs:256:35
+    |
+256 |     let reflection_system = match reflection::ReflectionSystem::new(
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+259 |         performance_monitor.clone()
+    |         --------------------------- unexpected argument #3
+    |
+note: associated function defined here
+   --> /home/ubuntu/rust-agi-os/src/reflection/reflection.rs:499:12
+    |
+499 |     pub fn new(max_queue_size: usize, max_items: usize) -> Result<Self, ReflectionError> {
+    |            ^^^
+help: remove the extra argument
+    |
+258 -         reasoning_engine.clone(),
+259 -         performance_monitor.clone()
+258 +         reasoning_engine.clone()
+    |
+
+error[E0308]: `match` arms have incompatible types
+   --> src/main.rs:264:13
+    |
+256 |       let reflection_system = match reflection::ReflectionSystem::new(
+    |  _____________________________-
+257 | |         system_config.get_reflection_config(),
+258 | |         reasoning_engine.clone(),
+259 | |         performance_monitor.clone()
+260 | |     ) {
+261 | |         Ok(rs) => Arc::new(Mutex::new(rs)),
+    | |                   ------------------------ this is found to be of type `Arc<Mutex<ReflectionSystem>>`
+...   |
+264 | |             process::exit(1);
+    | |             ^^^^^^^^^^^^^^^^^ expected `Arc<Mutex<ReflectionSystem>>`, found `()`
+265 | |         }
+266 | |     };
+    | |_____- `match` arms have incompatible types
+    |
+    = note: expected struct `Arc<Mutex<ReflectionSystem>>`
+            found unit type `()`
+
+error[E0061]: this function takes 0 arguments but 2 arguments were supplied
+   --> src/main.rs:271:35
+    |
+271 |       let lifecycle_manager = match lifecycle::LifecycleManager::new(
+    |                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+272 |           system_config.get_lifecycle_config(),
+    |           ------------------------------------ unexpected argument #1
+273 | /         vec![
+274 | |             resource_manager.clone(),
+275 | |             monitoring_system.clone(),
+276 | |             integration_interface.clone(),
+277 | |             performance_monitor.clone(),
+278 | |             reflection_system.clone()
+279 | |         ]
+    | |_________- unexpected argument #2
+    |
+note: associated function defined here
+   --> /home/ubuntu/rust-agi-os/src/system/lifecycle.rs:130:12
+    |
+130 |     pub fn new() -> Self {
+    |            ^^^
+help: remove the extra arguments
+    |
+272 -         system_config.get_lifecycle_config(),
+272 +         ) {
+    |
+
+error[E0308]: mismatched types
+   --> src/main.rs:281:9
+    |
+271 |       let lifecycle_manager = match lifecycle::LifecycleManager::new(
+    |  ___________________________________-
+272 | |         system_config.get_lifecycle_config(),
+273 | |         vec![
+274 | |             resource_manager.clone(),
+...   |
+280 | |     ) {
+    | |_____- this expression has type `LifecycleManager`
+281 |           Ok(lm) => Arc::new(Mutex::new(lm)),
+    |           ^^^^^^ expected `LifecycleManager`, found `Result<_, _>`
+    |
+    = note: expected struct `LifecycleManager`
+                 found enum `Result<_, _>`
+
+error[E0308]: mismatched types
+   --> src/main.rs:282:9
+    |
+271 |       let lifecycle_manager = match lifecycle::LifecycleManager::new(
+    |  ___________________________________-
+272 | |         system_config.get_lifecycle_config(),
+273 | |         vec![
+274 | |             resource_manager.clone(),
+...   |
+280 | |     ) {
+    | |_____- this expression has type `LifecycleManager`
+281 |           Ok(lm) => Arc::new(Mutex::new(lm)),
+282 |           Err(e) => {
+    |           ^^^^^^ expected `LifecycleManager`, found `Result<_, _>`
+    |
+    = note: expected struct `LifecycleManager`
+                 found enum `Result<_, _>`
+
+Some errors have detailed explanations: E0061, E0252, E0308, E0425, E0432, E0433.
+For more information about an error, try `rustc --explain E0061`.
+warning: `rust_agi_os` (bin "rust_agi_os") generated 1 warning
+error: could not compile `rust_agi_os` (bin "rust_agi_os") due to 66 previous errors; 1 warning emitted

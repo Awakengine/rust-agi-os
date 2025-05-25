@@ -1,39 +1,57 @@
 [package]
-name = "agi-os-root"
+name = "rust_agi_os"
 version = "0.1.0"
 edition = "2021"
 authors = ["AGI OS Team"]
-description = "A strong artificial general intelligence operating system"
+description = "A Rust-based AGI Operating System"
 license = "MIT"
-repository = "https://github.com/Awakengine/rust-agi-os.git"
+repository = "https://github.com/Awakengine/rust-agi-os"
 
 [dependencies]
-tokio = { version = "1.45.0", features = ["full"] }
-futures = "0.3.31"
-crossbeam = "0.8.4"
-rayon = "1.10.0"
-serde = { version = "1.0.219", features = ["derive"] }
-serde_json = "1.0.140"
-rand = "0.8.5"
-log = "0.4.27"
-thiserror = "1.0.69"
-anyhow = "1.0.98"
-http = "0.2.12"
-openssl = { version = "0.10.72", features = ["vendored"] }
+# 核心依赖
+log = "0.4"
+env_logger = "0.10"
+thiserror = "1.0"
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.28", features = ["full"] }
+async-trait = "0.1"
+futures = "0.3"
+uuid = { version = "1.3", features = ["v4"] }
+rand = "0.8"
 
-[workspace]
-members = [
-    "src/agi-core",
-    "src/agi-symbolic",
-    "src/agi-neural",
-    "src/agi-security",
-    "src/agi-interaction"
-]
+# GUI相关依赖
+iced = { version = "0.9", features = ["tokio", "image", "debug", "canvas"] }
+iced_native = "0.10"
+iced_graphics = "0.8"
+iced_style = "0.8"
+image = "0.24"
+fontdue = "0.7"
 
-[lib]
-name = "rust_agi_os"
-path = "src/lib.rs"
+# 系统集成
+winit = "0.28"
+raw-window-handle = "0.5"
+wgpu = "0.16"
+gpu-alloc = "0.5"
+gpu-descriptor = "0.2"
 
-[[bin]]
-name = "rust_agi_os"
-path = "src/main.rs"
+# 性能优化
+rayon = "1.7"
+dashmap = "5.4"
+parking_lot = "0.12"
+
+[features]
+default = ["high_performance"]
+high_performance = []
+4k_support = []
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.dev]
+opt-level = 1
